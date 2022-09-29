@@ -1,24 +1,44 @@
-import logo from './logo.svg';
+import React,{useState,useEffect} from 'react'
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
+import Navbar from "./components/Navbar/NavScroll"
+import FormComponent from './components/Form/FormComponent';
 import './App.css';
 
+const override: CSSProperties = {
+  display: "flex",
+  margin: "auto",
+  borderColor: "red",
+  width:"100%",
+  height:"100vh",
+  backgroundColor:"#282c34"
+};
+
 function App() {
+  const [loading,setLoading]=useState(false)
+  let color="#d76737"
+  useEffect(()=>{
+    setLoading(true)
+    setTimeout(()=>{
+      setLoading(false)
+    },5000)
+  },[])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <>
+      {
+       loading?<ClimbingBoxLoader color={color} loading={loading} cssOverride={override}   size={35} />:
+        <div className='OutBox'>
+          <Navbar/>
+            <div className="App" style={{width:"90%",height:"100%"}}>
+              <div className='col1'>
+              <img src='https://assets.scaler.com/assets/data_science/svg/extra-e908e7bbef0eb95bee253dc456da50b043abea721b31b7c748da1955d950b747.svg.gz' /> {' '}
+              </div>
+              <div className='col2'>
+              <FormComponent/>
+              </div>
+            </div>
+        </div>
+      }
+      </>
   );
 }
 
